@@ -1,12 +1,15 @@
 const { refresh } = require('../refresh-token/index')
 
-const error = async ({ response }) => {
+const error = async ({ response }, client_id, client_secret) => {
 
     if (response.status === 401) {
-        return await refresh('token')
+        return await refresh(client_id, client_secret)
     }
 
-    return response
+    return {
+        status: response.status,
+        data: response.data
+    }
 
 }
 

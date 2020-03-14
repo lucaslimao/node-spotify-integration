@@ -3,54 +3,82 @@ const utils = require('../core/utils/index')
 
 const uri = '/artists'
 
-const byId = client => async id => {
+const byId = (client, client_id, client_secret) => async id => {
 
     try{
-        return await client.get(`${uri}/${id}`)
+
+        const { status, data } = await client.get(`${uri}/${id}`)
+
+        return {
+            status,
+            data
+        }
+
     } catch (error) {
-        return await utils.error(error)
+        return await utils.error(error, client_id, client_secret)
     }
 
 }
 
-const releated = client => async id => {
+const releated = (client, client_id, client_secret) => async id => {
 
     try {
-        return await client.get(`${uri}/${id}/related-artists`)
+
+        const { status, data } = await client.get(`${uri}/${id}/related-artists`)
+
+        return {
+            status,
+            data: data.artists.items
+        }
+
     } catch (error) {
-        return await utils.error(error)
+        return await utils.error(error, client_id, client_secret)
     }
 }
 
-const search = client => async name => {
+const search = (client, client_id, client_secret) => async name => {
 
     try{
-        return await client.get(`/search?q=${name}&type=artist`)
+
+        const { status, data } = await client.get(`/search?q=${name}&type=artist`)
+
+        return {
+            status,
+            data: data.artists.items
+        }
+
     } catch (error) {
-        return await utils.error(error)
+        return await utils.error(error, client_id, client_secret)
     }
 
 }
 
-const several = client => async artists => {
+const several = (client, client_id, client_secret) => async artists => {
 
     try {
-        return await client.get(`${uri}?ids=${artists}`)
+
+        const { status, data } = await client.get(`${uri}?ids=${artists}`)
+
+        return {
+            status,
+            data: data.artists.items
+        }
+
     } catch (error) {
-        return await utils.error(error)
+        return await utils.error(error, client_id, client_secret)
     }
 
 }
 
-module.exports = (token) => {
+module.exports = (token, client_id, client_secret) => {
 
     const client = serviceClient(token)
 
     return {
-        byId: byId(client),
-        releated: releated(client),
-        search: search(client),
-        several: several(client)
+        byId: byId(client, client_id, client_secret),
+        releated: releated(client, client_id, client_secret),
+        search: search(client, client_id, client_secret),
+        several: several(client, client_id, client_secret)
     }
 
 }
