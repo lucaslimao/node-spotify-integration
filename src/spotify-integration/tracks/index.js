@@ -1,29 +1,46 @@
+const serviceClient = require('../core/client/index')
+const utils = require('../core/utils/index')
+
 const uri = '/tracks'
 
-const byId = (token, id) => {
-    return id
+const byId = client => async (id) => {
+
+    try {
+        return await client.get(`${uri}/${id}`)
+    } catch (error) {
+        return await utils.error(error)
+    }
+
 }
 
-const search = (token, name) => {
-    return name
+const search = client => async (name) => {
+
+    try {
+        return await client.get(`/search?q=${name}&type=track`)
+    } catch (error) {
+        return await utils.error(error)
+    }
+
 }
 
-const several = (token, tracks) => {
-    return tracks
+const several = client => async (tracks) => {
+
+    try {
+        return await client.get(`${uri}?ids=${tracks}`)
+    } catch (error) {
+        return await utils.error(error)
+    }
+
 }
 
 module.exports = (token) => {
 
+    const client = serviceClient(token)
+
     return {
-        byId: (id) => {
-            byId(token, id)
-        },
-        search: (name) => {
-            search(token, name)
-        },
-        several: (tracks) => {
-            several(token, tracks)
-        }
+        byId: byId(client),
+        search: search(client),
+        several: several(client)
     }
 
 }

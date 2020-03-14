@@ -1,40 +1,56 @@
-const client = require('../core/client/index')
+const serviceClient = require('../core/client/index')
+const utils = require('../core/utils/index')
 
 const uri = '/artists'
 
-const byId = (id) => {
-    return id
+const byId = client => async id => {
+
+    try{
+        return await client.get(`${uri}/${id}`)
+    } catch (error) {
+        return await utils.error(error)
+    }
+
 }
 
-const releated = (id) => {
-    return id
+const releated = client => async id => {
+
+    try {
+        return await client.get(`${uri}/${id}/related-artists`)
+    } catch (error) {
+        return await utils.error(error)
+    }
 }
 
-const search = (name) => {
-    return name
+const search = client => async name => {
+
+    try{
+        return await client.get(`/search?q=${name}&type=artist`)
+    } catch (error) {
+        return await utils.error(error)
+    }
+
 }
 
-const several = (artists) => {
-    return client.get(`artists?ids=${artists}`)
+const several = client => async artists => {
+
+    try {
+        return await client.get(`${uri}?ids=${artists}`)
+    } catch (error) {
+        return await utils.error(error)
+    }
+
 }
 
 module.exports = (token) => {
 
-    client(token)
+    const client = serviceClient(token)
 
     return {
-        byId: (id) => {
-            byId(id)
-        },
-        releated: (id) => {
-            releated(id)
-        },
-        search: (name) => {
-            search(name)
-        },
-        several: (artists) => {
-            several(artists)
-        }
+        byId: byId(client),
+        releated: releated(client),
+        search: search(client),
+        several: several(client)
     }
 
 }
