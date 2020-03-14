@@ -5,7 +5,7 @@ const uri = '/artists'
 
 const byId = (client, client_id, client_secret) => async id => {
 
-    try{
+    try {
 
         const { status, data } = await client.get(`${uri}/${id}`)
 
@@ -15,7 +15,7 @@ const byId = (client, client_id, client_secret) => async id => {
         }
 
     } catch (error) {
-        return await utils.error(error, client_id, client_secret)
+        return await utils.error(error, client_id, client_secret, byId, id)
     }
 
 }
@@ -32,7 +32,7 @@ const releated = (client, client_id, client_secret) => async id => {
         }
 
     } catch (error) {
-        return await utils.error(error, client_id, client_secret)
+        return await utils.error(error, client_id, client_secret, releated, id)
     }
 }
 
@@ -48,7 +48,7 @@ const search = (client, client_id, client_secret) => async name => {
         }
 
     } catch (error) {
-        return await utils.error(error, client_id, client_secret)
+        return await utils.error(error, client_id, client_secret, search, name)
     }
 
 }
@@ -65,14 +65,14 @@ const several = (client, client_id, client_secret) => async artists => {
         }
 
     } catch (error) {
-        return await utils.error(error, client_id, client_secret)
+        return await utils.error(error, client_id, client_secret, several, artists)
     }
 
 }
 
-module.exports = (token, client_id, client_secret) => {
+module.exports = (client_id, client_secret) => {
 
-    const client = serviceClient(token)
+    const client = serviceClient()
 
     return {
         byId: byId(client, client_id, client_secret),

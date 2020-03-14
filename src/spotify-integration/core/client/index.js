@@ -3,27 +3,31 @@ const config = require('config')
 
 const url = config.get('api.url')
 
-const buildHeader = (token) => {
+let __token = '.'
 
+const tokenStorage = token => {
+    __token = token
+}
+
+const headers = () => {
     return {
         headers: {
-            'Authorization': `Bearer ${token}`
+            'Authorization': `Bearer ${__token}`
         }
     }
 
 }
 
-const get = headers => async (uri) => await axios.get(`${url}${uri}`, headers)
+const get = async (uri) => await axios.get(`${url}${uri}`, headers())
 
-const post = headers => async (uri, data) => await axios.post(`${url}${uri}`, data, headers)
+const post = async (uri, data) => await axios.post(`${url}${uri}`, data, headers())
 
-module.exports = (token) => {
-
-    const headers = buildHeader(token)
+module.exports = () => {    
 
     return {
-        get: get(headers),
-        post: post(headers)
+        get: get,
+        post: post,
+        token: tokenStorage
     }
 
 }

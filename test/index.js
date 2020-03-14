@@ -1,10 +1,8 @@
-
-const __token = 'ANY_VALID_TOKEN'
 const client_id = 'YOURS_CLIENT_ID'
 const client_secret = 'YOURS_CLIENT_SCRET'
 
 const chai = require('chai')
-const service = require('../src/index')(__token, client_id, client_secret)
+const service = require('../src/index')(client_id, client_secret)
 const { refresh } = require('../src/spotify-integration/core/refresh-token/index')
 
 describe('artists', () => {
