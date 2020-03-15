@@ -21,7 +21,7 @@ const refresh = async (client_id, client_secret) => {
         );
 
     } catch (error) {
-        return error.response
+        throw error
     }
 
     
