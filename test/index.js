@@ -1,12 +1,23 @@
 
-const client_id = 'e0a41834a1ce4698bce14ce49f41cedf'
-const client_secret = '240c9d94c954411590004aa64f5ad961'
+const client_id = 'YOURS_CLIENT_ID'
+const client_secret = 'YOURS_CLIENT_SCRET'
 
 const chai = require('chai')
-const service = require('../src/index')(client_id, client_secret)
+const expect = require('chai').expect
+const spotifyService = require('../src/index')
 const { refresh } = require('../src/spotify-integration/core/refresh-token/index')
 
+describe('testing initial service', () => {
+
+    it('sending emptu client credentials', async () => { 
+        expect(() => spotifyService(client_id)).to.throw()
+    })
+
+})
+
 describe('artists', () => {
+
+    const service = spotifyService(client_id, client_secret)
 
     it('byId', async () => {
         const retorno = await service.artists.byId('04gDigrS5kc9YWfZHwBETP')
@@ -32,6 +43,8 @@ describe('artists', () => {
 
 describe('tracks', () => {
 
+    const service = spotifyService(client_id, client_secret)
+
     it('byId', async () => {
         const retorno = await service.tracks.byId('1')
         chai.assert.containsAllKeys(retorno, ['status', 'data'])
@@ -50,6 +63,8 @@ describe('tracks', () => {
 })
 
 describe('albums', () => {
+
+    const service = spotifyService(client_id, client_secret)
 
     it('byId', async () => {
         const retorno = await service.albums.byId('1')

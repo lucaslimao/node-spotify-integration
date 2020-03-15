@@ -5,6 +5,8 @@ const uri = '/artists'
 
 const byId = (client, client_id, client_secret) => async id => {
 
+    utils.isValid(id)
+
     try {
 
         const { status, data } = await client.get(`${uri}/${id}`)
@@ -22,6 +24,8 @@ const byId = (client, client_id, client_secret) => async id => {
 
 const releated = (client, client_id, client_secret) => async id => {
 
+    utils.isValid(id)
+
     try {
 
         const { status, data } = await client.get(`${uri}/${id}/related-artists`)
@@ -37,6 +41,8 @@ const releated = (client, client_id, client_secret) => async id => {
 }
 
 const search = (client, client_id, client_secret) => async name => {
+
+    utils.isValid(name)
 
     try{
 
@@ -54,6 +60,8 @@ const search = (client, client_id, client_secret) => async name => {
 }
 
 const several = (client, client_id, client_secret) => async artists => {
+
+    utils.isValid(artists)
 
     try {
 

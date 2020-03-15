@@ -26,6 +26,15 @@ const error = async ({ response }, client_id, client_secret, fn, params) => {
 
 }
 
+const isValid = (item) => {
+
+    if (!item || item === undefined || item === '') {
+        throw new Error('Invalid value')
+    }
+
+}
+
 module.exports = {
-    error
+    error,
+    isValid
 }

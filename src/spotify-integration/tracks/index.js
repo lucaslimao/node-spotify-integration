@@ -5,6 +5,8 @@ const uri = '/tracks'
 
 const byId = (client, client_id, client_secret) => async (id) => {
 
+    utils.isValid(id)
+
     try {
 
         const { status, data } = await client.get(`${uri}/${id}`)
@@ -22,6 +24,8 @@ const byId = (client, client_id, client_secret) => async (id) => {
 
 const search = (client, client_id, client_secret) => async (name) => {
 
+    utils.isValid(name)
+
     try {
 
         const { status, data } = await client.get(`/search?q=${name}&type=track`)
@@ -38,6 +42,8 @@ const search = (client, client_id, client_secret) => async (name) => {
 }
 
 const several = (client, client_id, client_secret) => async (tracks) => {
+
+    utils.isValid(tracks)
 
     try {
 
