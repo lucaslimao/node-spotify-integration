@@ -4,11 +4,11 @@ library that aims to make communication with spotify more transparent
 ## Example
 
 ```javascript
-const service = require('../src/index')(client_id, client_secret)
+const service = require('node-spotify-integration')(client_id, client_secret)
 ```
 or
 ```javascript
-const Service = require('../src/index')
+const Service = require('node-spotify-integration')
 const service = Service(client_id, client_secret)
 ```
 
