@@ -6,6 +6,11 @@ library that aims to make communication with spotify more transparent
 ```javascript
 const service = require('../src/index')(client_id, client_secret)
 ```
+or
+```javascript
+const Service = require('../src/index')
+const service = Service(client_id, client_secret)
+```
 
 ### methods
 
