@@ -28,7 +28,7 @@ const releated = (client, client_id, client_secret) => async id => {
 
         return {
             status,
-            data: data.artists.items
+            data: data.artists
         }
 
     } catch (error) {
@@ -44,7 +44,7 @@ const search = (client, client_id, client_secret) => async name => {
 
         return {
             status,
-            data: data.artists.items
+            data: data.artists
         }
 
     } catch (error) {

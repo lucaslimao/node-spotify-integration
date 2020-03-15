@@ -1,7 +1,7 @@
 const serviceClient = require('../core/client/index')
 const utils = require('../core/utils/index')
 
-const uri = '/tracks'
+const uri = '/albums'
 
 const byId = (client, client_id, client_secret) => async (id) => {
 
@@ -24,7 +24,7 @@ const search = (client, client_id, client_secret) => async (name) => {
 
     try {
 
-        const { status, data } = await client.get(`/search?q=${name}&type=track`)
+        const { status, data } = await client.get(`/search?q=${name}&type=album`)
 
         return {
             status,
@@ -37,19 +37,19 @@ const search = (client, client_id, client_secret) => async (name) => {
 
 }
 
-const several = (client, client_id, client_secret) => async (tracks) => {
+const several = (client, client_id, client_secret) => async (albums) => {
 
     try {
 
-        const { status, data } = await client.get(`${uri}?ids=${tracks}`)
+        const { status, data } = await client.get(`${uri}?ids=${albums}`)
 
         return {
             status,
-            data: data.tracks
+            data: data.albums
         }
 
     } catch (error) {
-        return await utils.error(error, client_id, client_secret, several, tracks)
+        return await utils.error(error, client_id, client_secret, several, albums)
     }
 
 }
