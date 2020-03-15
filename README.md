@@ -9,6 +9,18 @@ const service = require('../src/index')(client_id, client_secret)
 
 ### methods
 
+### albums
+
+```javascript
+service.albums.byId('album_id')
+```
+```javascript
+service.albums.search('album_name')
+```
+```javascript
+service.albums.several('album_id, album_id')
+```
+
 ### artists
 
 ```javascript
