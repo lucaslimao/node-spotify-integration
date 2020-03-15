@@ -1,5 +1,4 @@
 const { refresh } = require('../refresh-token/index')
-const clientService = require('../client/index')
 
 const error = async ({ response }, client_id, client_secret, fn, params) => {
 

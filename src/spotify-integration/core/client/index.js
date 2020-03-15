@@ -1,7 +1,6 @@
 const axios = require('axios')
-const config = require('config')
 
-const url = config.get('api.url')
+const url = 'https://api.spotify.com/v1'
 
 let __token = '.'
 
