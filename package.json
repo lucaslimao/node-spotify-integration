@@ -1,6 +1,6 @@
 {
   "name": "node-spotify-integration",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Lib que facilita a integração aplicação-spotify",
   "main": "src/index.js",
   "scripts": {
