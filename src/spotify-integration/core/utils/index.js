@@ -1,4 +1,5 @@
 const { refresh } = require('../refresh-token/index')
+const clientService = require('../client/index')
 
 const error = async ({ response }, client_id, client_secret, fn, params) => {
 
@@ -15,6 +16,8 @@ const error = async ({ response }, client_id, client_secret, fn, params) => {
             return await fn(client, client_id, client_secret)(params)
 
         } catch(error) {  
+
+            console.log(error)
 
             return {
                 status: error.response.status,
