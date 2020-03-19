@@ -1,6 +1,6 @@
 {
   "name": "node-spotify-integration",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Lib que facilita a integração aplicação-spotify",
   "main": "src/index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "chai": "^4.2.0",
-    "mocha": "^7.1.0"
+    "mocha": "^7.1.0",
+    "musii-node-helper": "0.0.2"
   }
 }

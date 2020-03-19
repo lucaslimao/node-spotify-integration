@@ -1,6 +1,6 @@
 
-const client_id = 'YOURS_CLIENT_ID'
-const client_secret = 'YOURS_CLIENT_SCRET'
+const client_id = 'e0a41834a1ce4698bce14ce49f41cedf'
+const client_secret = '240c9d94c954411590004aa64f5ad961'
 
 const chai = require('chai')
 const expect = require('chai').expect
@@ -35,8 +35,12 @@ describe('artists', () => {
     })
 
     it('several', async () => {
-        const retorno = await service.artists.several('04gDigrS5kc9YWfZHwBETP')
+
+        const retorno = await service.artists.several('04gDigrS5kc9YWfZHwBETP,7dGJo4pcD2V6oG8kP0tJRR')
+        
+        chai.assert.equal(retorno.data.length, 2)
         chai.assert.equal(retorno.status, 200)
+        
     })
 
 })

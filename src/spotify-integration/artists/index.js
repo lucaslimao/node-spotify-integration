@@ -1,7 +1,10 @@
 const serviceClient = require('../core/client/index')
 const utils = require('../core/utils/index')
+const { logger } = require('musii-node-helper')
 
 const uri = '/artists'
+
+const logPrefix = '[Artists]'
 
 const byId = (client, client_id, client_secret) => async id => {
 
@@ -9,7 +12,11 @@ const byId = (client, client_id, client_secret) => async id => {
 
     try {
 
+        logger.info(`${logPrefix} ById, Id = ${id}`)
+
         const { status, data } = await client.get(`${uri}/${id}`)
+
+        logger.info(`${logPrefix} ById, Id = ${id}, Success`)
 
         return {
             status,
@@ -28,7 +35,11 @@ const releated = (client, client_id, client_secret) => async id => {
 
     try {
 
+        logger.info(`${logPrefix} Releated, Id = ${id}`)
+
         const { status, data } = await client.get(`${uri}/${id}/related-artists`)
+
+        logger.info(`${logPrefix} Releated, Id = ${id}, Success`)
 
         return {
             status,
@@ -46,7 +57,11 @@ const search = (client, client_id, client_secret) => async name => {
 
     try{
 
+        logger.info(`${logPrefix} Search, Name = ${name}`)
+
         const { status, data } = await client.get(`/search?q=${name}&type=artist`)
+
+        logger.info(`${logPrefix} Search, Name = ${name}, Success`)
 
         return {
             status,
@@ -65,11 +80,15 @@ const several = (client, client_id, client_secret) => async artists => {
 
     try {
 
+        logger.info(`${logPrefix} Several, `)
+
         const { status, data } = await client.get(`${uri}?ids=${artists}`)
+
+        logger.info(`${logPrefix} Several, Success`)
 
         return {
             status,
-            data: data.artists.items
+            data: data.artists
         }
 
     } catch (error) {

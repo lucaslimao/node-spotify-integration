@@ -1,5 +1,6 @@
 const { refresh } = require('../refresh-token/index')
 const clientService = require('../client/index')
+const { logger } = require('musii-node-helper')
 
 const error = async ({ response }, client_id, client_secret, fn, params) => {
 
@@ -17,11 +18,11 @@ const error = async ({ response }, client_id, client_secret, fn, params) => {
 
         } catch(error) {  
 
-            console.log(error)
+            error && logger.error(`[Spotify][Error] ${error.message}`)
 
             return {
-                status: error.response.status,
-                data: error.response.data
+                status: 401,
+                data: 'Not Authorize'
             }
 
         }
@@ -38,7 +39,7 @@ const error = async ({ response }, client_id, client_secret, fn, params) => {
 const isValid = (item) => {
 
     if (!item || item === undefined || item === '') {
-        throw new Error('Invalid value')
+        throw new Error('Invalid Value')
     }
 
 }
